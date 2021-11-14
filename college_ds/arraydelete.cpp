@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-class elementInsert{
+class elementDelete{
     public:
 
     int n, i, a[100], value, index;
@@ -13,7 +13,7 @@ class elementInsert{
     void print();
 }ins1;
 
-void elementInsert::input(){
+void elementDelete::input(){
     cout<<"Enter the nuber of elements in array";
     cin>>n;
     cout<<"Enter the elements of array";
@@ -22,20 +22,19 @@ void elementInsert::input(){
     }
 }
 
-void elementInsert::operation(){
+void elementDelete::operation(){
     cout<<"Enter the index of position";
     cin>>index;
-    cout<<"Enter the element to be inserted";
-    cin>>value;
-    for(i=n;i>=index;i--){
-        a[i+1] = a[i];
+    value = a[index];
+    for(i=index;i<=n;i++){
+        a[i] = a[i+1];
     }
-    a[index] = value;
-    n++;
+    n--;
 }
 
-void elementInsert::print(){
-    cout<<"Elements of array : ";
+void elementDelete::print(){
+    cout<<"Deleted value = "<<value;
+    cout<<"\nElements of array : ";
     for(i=0;i<n;i++){
         cout<<a[i]<<" ";
     }
