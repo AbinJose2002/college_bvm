@@ -4,7 +4,7 @@ using namespace std;
 class linearSearch{
     public:
 
-    int a[100], n, i, item, loc;
+    int a[100], n, i, item, loc = 0;
     
     void input();
 
@@ -41,5 +41,9 @@ void linearSearch::search(){
 }
 
 void linearSearch::output(){
+    if(loc==0){
+    cout<<"Element not found";
+    }else{
     cout<<item<<" found at position "<<loc;
+    }
 }
