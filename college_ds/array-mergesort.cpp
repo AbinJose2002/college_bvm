@@ -1,66 +1,72 @@
 #include<iostream>
 using namespace std;
-class mergeSort{
+class mergesort{
     public:
-    int a[100], b[100], n, i, k;
-
-    void input(){
-        cout<<"Enter the number of elements";
-        cin>>n;
-        cout<<"Enter the elements of array";
-        for(i=0;i<n;i++){
-            cin>>a[i];
-        }
-        low = 0;
-        mergesort(low ,n-1);
+    void swapping(int &a, int &b) {    
+        int temp;
+        temp = a;
+        a = b;
+        b = temp;
     }
 
-    int mid, low, high;
-    void mergesort(int, int){
-        mid = (low+high)/2;
-        mergesort(low,mid);
-        mergesort(mid+1,high);
-        merge(low, mid, high);
-    }
-
-    void merge(int low, int mid, int high){
-        int h = low, i = low, j = mid+1;
-        while((h<=mid)&&(j<=high)){
-            if(a[h]<=a[j]){
-                b[i] = a[h];
-                h++;
-            }
-            else{
-                b[i] = a[j];
+    void merge(int *array, int l, int m, int r) {
+        int i, j, k, nl, nr;
+        nl = m-l+1; nr = r-m;
+        int larr[nl], rarr[nr];
+        for(i = 0; i<nl; i++)
+        larr[i] = array[l+i];
+        for(j = 0; j<nr; j++)
+        rarr[j] = array[m+1+j];
+        i = 0; j = 0; k = l;
+        while(i < nl && j<nr) {
+            if(larr[i] <= rarr[j]) {
+                array[k] = larr[i];
+                i++;
+            }else{
+                array[k] = rarr[j];
                 j++;
             }
+            k++;
         }
-        if(h>mid){
-            for(k = j; k<=high; k++){
-                b[i] = a[k];
-                i++;
-            }
-        }else{
-            for(k = h; k<=mid; k++){
-                b[i] = a[k];
-                i++;
-            }
+        while(i<nl) {       
+            array[k] = larr[i];
+            i++; k++;
         }
-        for(k=low;k<=high;k++){
-            a[k] = b[k];
+        while(j<nr) {  
+            array[k] = rarr[j];
+            j++; k++;
         }
+    }
+    void mergeSort(int *array, int l, int r) {
+    int m;
+    if(l < r) {
+        int m = l+(r-l)/2;
+        mergeSort(array, l, m);
+        mergeSort(array, m+1, r);
+        merge(array, l, m, r);
+        }
+    }
+    void input(){
+        int n;
+        cout << "Enter the number of elements: ";
+        cin >> n;
+        int arr[n];    
+        cout << "Enter elements:" << endl;
+        for(int i = 0; i<n; i++) {
+            cin >> arr[i];
+        }
+        mergeSort(arr, 0, n-1);  
+        cout << "Array after Sorting: ";
+        display(arr, n);
     }
 
-    void output(){
-        cout<<"Sorted array = ";
-        for(i=0;i<n;i++){
-            cout<<a[i]<<" ";
-        }
+    void display(int *array, int size) {
+        for(int i = 0; i<size; i++)
+        cout << array[i] << " ";
+        cout << endl;
     }
+
 }obj;
-
-int main(){
-    obj.input();
-    obj.output();
-    return 0;
+int main() {
+   obj.input();  
 }

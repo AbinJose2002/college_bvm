@@ -1,3 +1,4 @@
+// leo sebastian is a killadi
 #include<stdio.h>
 int main(){
     int i, j, row, column, flag = 0;
