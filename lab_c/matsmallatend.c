@@ -1,3 +1,6 @@
+//write a c program to find smallest element among row and column insert those elements to an extra 
+//row and column of the matrix. Use function calling with argument passing to read, find, print the whole 
+//operation of the matrix
 #include<stdio.h>
 void read(int a[100][100], int row, int col){
     int i, j;
