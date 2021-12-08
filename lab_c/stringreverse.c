@@ -5,6 +5,7 @@
      int count;
      printf("Enter the string : ");
      gets(a);
+     printf("%d\n",a.length)
      for(int i=0;a[i]!='\0';i++){
          count++;
      }
