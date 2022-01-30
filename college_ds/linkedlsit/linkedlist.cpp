@@ -26,6 +26,7 @@ void deletion(node* &head, int val){
     }
     while(temp->next!=NULL){
         if(temp->next->info==val){
+            cout<<temp->next->info<<" deleted"<<endl;
             temp->next = temp->next->next;
         }temp = temp->next;
     }
