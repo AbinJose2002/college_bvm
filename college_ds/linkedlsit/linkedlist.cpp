@@ -26,10 +26,13 @@ void deletion(node* &head, int val){
     }
     while(temp->next!=NULL){
         if(temp->next->info==val){
+            node* toDelete = temp->next;
             cout<<temp->next->info<<" deleted"<<endl;
             temp->next = temp->next->next;
         }temp = temp->next;
     }
+    
+    delete temp;
 }
 
 //linear search throughout linked list
@@ -46,6 +49,7 @@ bool linearSearch(node* &head,int val){
         }
         temp = temp->next;
     }return false;
+    delete temp;
 }
 
 //insert element after a node using linear serach
