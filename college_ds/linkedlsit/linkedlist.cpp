@@ -17,6 +17,32 @@ class node{
     
 };
 
+//node deletion at head
+void deletionAtHead(node* &head){
+    if(head==NULL){
+        cout<<"\nLinked list is empty\n";
+        return;
+    }
+    node* toDelete = head;
+    head = head->next;
+    delete toDelete;
+}
+
+//node deletion at tail
+void deletionAtTail(node* &head){
+    if(head==NULL){
+        cout<<"\nLinked list is empty\n";
+        return;
+    }
+    node* temp = head;
+    while (temp->next->next!=NULL){
+        temp = temp->next;
+    }
+    node* toDelete = temp->next;
+    temp->next = NULL;
+    delete toDelete;
+}
+
 //node deletion
 void deletion(node* &head, int val){
     node* temp = head;
@@ -29,7 +55,9 @@ void deletion(node* &head, int val){
             node* toDelete = temp->next;
             cout<<temp->next->info<<" deleted"<<endl;
             temp->next = temp->next->next;
-        }temp = temp->next;
+            return;
+        }
+        temp = temp->next;
     }
     
     delete temp;
@@ -117,6 +145,10 @@ int main(){
     insertAfterNode(head,2,8);
     display(head);
     deletion(head,3);
+    display(head);
+    deletionAtHead(head);
+    display(head);
+    deletionAtTail(head);
     display(head);
     return 0;
 }
