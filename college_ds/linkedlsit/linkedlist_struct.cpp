@@ -90,6 +90,21 @@ class link_list{
         n->next = temp->next;
         temp->next = n;
     }
+    void deleteAtHead(){
+
+    }
+    void deleteAtEnd(){
+
+    }
+    void deleteAfterNode(){
+
+    }
+    void deleteBeforeNode(){
+
+    }
+    void sort(){
+        
+    }
     void display(){
         node* temp = head;
         while(temp->next!=NULL){
@@ -103,7 +118,7 @@ int main(){
     int opt;
     char ch;
     do{
-        cout<<"Enter from the options : \n1.Insert\t2.Delete\t3.Display\n";
+        cout<<"Enter from the options : \n1.Insert\t2.Delete\t3.Display\t4.Sort\n";
         cin>>opt;
         switch(opt){
             case 1 : cout<<"Insertion\n1.At end\t2.At head\n3.After node\t4.Before node\n";
@@ -119,7 +134,24 @@ int main(){
                     break;
                 }
             break;
+            case 2 : cout<<"Deletion\n1.At end\t2.At head\n3.After node\t4.Before node\n";
+                cin>>opt;
+                switch(opt){
+                    case 1 : obj.deleteAtEnd();
+                    break;
+                    case 2 : obj.deleteAtHead();
+                    break;
+                    case 3 : obj.deleteAfterNode();
+                    break;
+                    case 4 : obj.deleteBeforeNode();
+                    break;
+                }
+            break;
             case 3 : obj.display();
+            break;
+            case 4 : obj.sort();
+            break;
+            default : cout<<"\nInvalid choice input\n";
         }
         cout<<"\nDo you want to continue(y/n)?";
         cin>>ch;
