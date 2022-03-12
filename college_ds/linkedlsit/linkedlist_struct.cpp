@@ -6,7 +6,8 @@ struct node{
 };
 class link_list{
     public:
-    int item, node_item;
+    int item;
+    int node_item;
     node* head;
     link_list(){
         head = NULL;
@@ -51,14 +52,14 @@ class link_list{
         if(head == NULL){
             cout<<"\nNo node found so inserted at head\n";
             head = n;
+            cout<<head->data;
             return;
         }
         cout<<"Enter the node element : ";
         cin>>node_item;
-        node* temp = head;
-        while(temp->data!=item){
-            if(temp->next == NULL)
-                return;
+        node* temp = new node;
+        temp = head;
+        while(temp->data!=node_item){
             temp = temp->next;
         }
         n->next = temp->next;
@@ -82,28 +83,76 @@ class link_list{
             return;
         }
         node* temp = head;
-        while(temp->next->data!=item){
-            if(temp->next == NULL)
+        while(temp->next->data!=node_item){
+            if(temp->next == NULL){
                 return;
+            }
             temp = temp->next;
         }
         n->next = temp->next;
         temp->next = n;
     }
     void deleteAtHead(){
-
+        node* deleteNode = head;
+        node* temp = head;
+        head = temp->next;
+        cout<<"Node element "<<deleteNode->data<<" deleted\n";
+        delete deleteNode;
     }
     void deleteAtEnd(){
-
+        node* deleteNode = new node;
+        node* temp = head;
+        while(temp->next->next!=NULL){
+            temp = temp->next;
+        }
+        deleteNode = temp->next;
+        cout<<"Node element "<<deleteNode->data<<" deleted\n";
+        temp->next = NULL;
     }
     void deleteAfterNode(){
-
+        node* deleteNode = new node;
+        node* temp = head;
+        cout<<"Enter the node element : ";
+        cin>>node_item;
+        while(temp->data!=node_item){
+            temp = temp->next;
+        }
+        deleteNode = temp->next;
+        cout<<"Node element "<<deleteNode->data<<" deleted\n";
+        temp->next = temp->next->next;
     }
     void deleteBeforeNode(){
-
+        node* deleteNode = new node;
+        node* temp = head;
+        cout<<"Enter the node element : ";
+        cin>>node_item;
+        if(temp->next->data==node_item){
+            deleteNode = head;
+            head = temp->next;
+            cout<<"Node element "<<deleteNode->data<<" deleted\n";
+            return;
+        }
+        while(temp->next->next->data!=node_item){
+            temp = temp->next;
+        }
+        deleteNode = temp->next;
+        cout<<"Node element "<<deleteNode->data<<" deleted\n";
+        temp->next = temp->next->next;
     }
     void sort(){
-        
+        node* sort_temp = new node;
+        node* temp1 = head;
+        node* temp2 = head->next;
+        for(temp1->next;temp1->next!=NULL;temp1=temp1->next){
+            for(temp2->next;temp2->next!=NULL;temp2=temp2->next){
+                if(temp1->data > temp2->data){
+                    cout<<"hello";
+                    sort_temp = temp1;
+                    temp1 = temp2;
+                    temp2 = sort_temp;
+                }
+            }
+        }
     }
     void display(){
         node* temp = head;
