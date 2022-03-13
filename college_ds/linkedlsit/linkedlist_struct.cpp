@@ -140,19 +140,31 @@ class link_list{
         temp->next = temp->next->next;
     }
     void sort(){
-        node* sort_temp = new node;
+        int sort_temp;
         node* temp1 = head;
         node* temp2 = head->next;
-        for(temp1->next;temp1->next!=NULL;temp1=temp1->next){
-            for(temp2->next;temp2->next!=NULL;temp2=temp2->next){
+        for(temp1->data;temp1->next!=NULL;temp1=temp1->next){
+            for(temp2=temp1->next;temp2->next!=NULL;temp2=temp2->next){
                 if(temp1->data > temp2->data){
-                    cout<<"hello";
-                    sort_temp = temp1;
-                    temp1 = temp2;
-                    temp2 = sort_temp;
+                    sort_temp = temp1->data;
+                    temp1->data = temp2->data;
+                    temp2->data = sort_temp;
                 }
             }
         }
+    }
+    void search(){
+        node* temp = head;
+        cout<<"Enter the item to find : ";
+        cin>>item;
+        while(temp->next!=NULL){
+            if(temp->data==item){
+                cout<<item<<" found";
+                return;
+            }
+            temp = temp->next;
+        }
+        cout<<item<<" not found";
     }
     void display(){
         node* temp = head;
@@ -167,7 +179,7 @@ int main(){
     int opt;
     char ch;
     do{
-        cout<<"Enter from the options : \n1.Insert\t2.Delete\t3.Display\t4.Sort\n";
+        cout<<"Enter from the options : \n1.Insert\t2.Delete\n3.Display\t4.Sort\n5.Search\n";
         cin>>opt;
         switch(opt){
             case 1 : cout<<"Insertion\n1.At end\t2.At head\n3.After node\t4.Before node\n";
@@ -199,6 +211,8 @@ int main(){
             case 3 : obj.display();
             break;
             case 4 : obj.sort();
+            break;
+            case 5 : obj.search();
             break;
             default : cout<<"\nInvalid choice input\n";
         }
