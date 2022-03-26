@@ -35,24 +35,42 @@ class quickSort{
     }
 
     void input(){
-        cout<<"How many elements";
+        cout<<"Enter the number of elements of array ";
         cin>>n;
-        cout<<"\nEnter elements of array";
+        cout<<"Enter the elements of array\n";
         for(i=0;i<n;i++){
             cin>>a[i];
         }
-        quick_sort(a,0,n-1);
+        output();
     }
 
-    void display(){
-    cout<<"\nArray after sorting : ";
-    for(i=0;i<n;i++){
-        cout<<a[i]<<" ";
-    }
-    }
+    void output(){
+        cout<<"Array = ";
+        for(i=0;i<n;i++){
+            cout<<a[i]<<" ";
+        }
+    } 
 }obj;
+
 int main(){
-    obj.input();
-    obj.display();    
+    int opt;
+    char ch;
+    do{
+        cout<<"Enter the choice from below\n1.Input\t2.Display\n3.Sort\n";
+        cin>>opt;
+        switch (opt)
+        {
+        case 1 : obj.input();
+            break;
+        case 2 : obj.output();
+            break;
+        case 3 : obj.quick_sort(obj.a,0,obj.n-1);
+            cout<<"Sorting completed succesfully\n"; 
+            break;    
+        default: cout<<"Invalid input entered";
+        }
+        cout<<"\nDo you want to continue(y/n)?";
+        cin>>ch;
+    }while(ch=='y'||ch=='Y');
     return 0;
 }
