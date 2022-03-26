@@ -42,8 +42,24 @@ class selectionSort{
 }obj;
 
 int main(){
-    obj.input();
-    obj.sort();
-    obj.output();
+    int opt;
+    char ch;
+    do{
+        cout<<"Enter the choice from below\n1.Input\t2.Display\n3.Sort\n";
+        cin>>opt;
+        switch (opt)
+        {
+        case 1 : obj.input();
+            break;
+        case 2 : obj.output();
+            break;
+        case 3 : cout<<"Sorting completed succesfully\n"; 
+            obj.sort();
+            break;    
+        default: cout<<"Invalid input entered";
+        }
+        cout<<"\nDo you want to continue(y/n)?";
+        cin>>ch;
+    }while(ch=='y'||ch=='Y');
     return 0;
 }
