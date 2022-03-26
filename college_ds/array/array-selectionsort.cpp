@@ -34,7 +34,7 @@ class selectionSort{
         
     }
     void output(){
-        cout<<"Sorted array = ";
+        cout<<"Array = ";
         for(i=0;i<n;i++){
             cout<<a[i]<<" ";
         }
@@ -53,8 +53,8 @@ int main(){
             break;
         case 2 : obj.output();
             break;
-        case 3 : cout<<"Sorting completed succesfully\n"; 
-            obj.sort();
+        case 3 : obj.sort();
+            cout<<"Sorting completed succesfully\n"; 
             break;    
         default: cout<<"Invalid input entered";
         }
