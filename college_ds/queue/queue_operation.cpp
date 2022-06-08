@@ -10,14 +10,20 @@ class queue{
         cin>>n;
     }
     void insert(){
-        if(rear==n){
-            cout<<"Queue Overflow";
-        }else{
-            cout<<"\nEnter the item to insert";
-            cin>>item;
-            a[rear] = item;
-            rear++;
-        }
+        char ch;
+        do{
+            if(rear==n){
+                cout<<"Queue Overflow";
+            }else{
+                cout<<"\nEnter the item to insert";
+                cin>>item;
+                a[rear] = item;
+                rear++;
+            }
+            cout<<"Do ypu want to repeat insertion(y/n)?";
+            cin>>ch;
+        }while(ch=='y'||ch=='Y');
+        cout<<"\nInsertion Completed\n";
     }
     void deletion(){
         if(front==rear){

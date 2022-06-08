@@ -10,20 +10,27 @@ class circularQueue{
         cin>>n;
     }
     void insert(){
-        if((rear==n&&front==1)||(front==rear+1)){
-            cout<<"\nOverflow\n";
-        }else{
-            if(front==0){
-                front = rear = 1;
-            }else if(rear==n){
-                rear = 1;
+        char ch;
+        do{
+            if((rear==n&&front==1)||(front==rear+1)){
+                cout<<"\nOverflow\n";
+                return;
             }else{
-                rear++;
-            }
-        }
-        cout<<"\nEnter the element to insert\n";
-        cin>>item;
-        a[rear] = item;
+                if(front==0){
+                    front = rear = 1;
+                }else if(rear==n){
+                    rear = 1;
+                }else{
+                    rear++;
+                }
+            }    
+            cout<<"\nEnter the element to insert\n";
+            cin>>item;
+            a[rear] = item;
+            cout<<"Do ypu want to repeat insertion(y/n)?";
+            cin>>ch;
+        }while(ch=='y'||ch=='Y');
+        cout<<"\nInsertion Completed\n";
     }
     void deletion(){
         if(front==0){
