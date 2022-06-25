@@ -9,9 +9,6 @@ class link_list{
     int item;
     int node_item;
     node* head;
-    link_list(){
-        head = NULL;
-    }
     void inputAtEnd(){
         cout<<"\nEnter the item to input : ";
         cin>>item;
@@ -43,55 +40,6 @@ class link_list{
         head = n;
         n->next = temp;
     }
-    void insertAfterNode(){
-        cout<<"\nEnter the item to input : ";
-        cin>>item;
-        node* n = new node;
-        n->next = NULL;
-        n->data = item;
-        if(head == NULL){
-            cout<<"\nNo node found so inserted at head\n";
-            head = n;
-            cout<<head->data;
-            return;
-        }
-        cout<<"Enter the node element : ";
-        cin>>node_item;
-        node* temp = new node;
-        temp = head;
-        while(temp->data!=node_item){
-            temp = temp->next;
-        }
-        n->next = temp->next;
-        temp->next = n;
-    }
-    void insertBeforeNode(){
-        cout<<"Enter the node element : ";
-        cin>>node_item;
-        if(head->data==node_item){
-            insertAtHead();
-            return;
-        }
-        cout<<"\nEnter the item to input : ";
-        cin>>item;
-        node* n = new node;
-        n->next = NULL;
-        n->data = item;
-        if(head == NULL){
-            cout<<"\nNo node found so inserted at head\n";
-            head = n;
-            return;
-        }
-        node* temp = head;
-        while(temp->next->data!=node_item){
-            if(temp->next == NULL){
-                return;
-            }
-            temp = temp->next;
-        }
-        n->next = temp->next;
-        temp->next = n;
-    }
     void deleteAtHead(){
         node* deleteNode = head;
         node* temp = head;
@@ -109,62 +57,28 @@ class link_list{
         cout<<"Node element "<<deleteNode->data<<" deleted\n";
         temp->next = NULL;
     }
-    void deleteAfterNode(){
+    void deleteInfo(){
         node* deleteNode = new node;
-        node* temp = head;
+        node* prev = head;
         cout<<"Enter the node element : ";
         cin>>node_item;
-        while(temp->data!=node_item){
-            temp = temp->next;
-        }
-        deleteNode = temp->next;
-        cout<<"Node element "<<deleteNode->data<<" deleted\n";
-        temp->next = temp->next->next;
-    }
-    void deleteBeforeNode(){
-        node* deleteNode = new node;
-        node* temp = head;
-        cout<<"Enter the node element : ";
-        cin>>node_item;
-        if(temp->next->data==node_item){
-            deleteNode = head;
-            head = temp->next;
-            cout<<"Node element "<<deleteNode->data<<" deleted\n";
+        node* temp = prev->next;
+        if(prev->data==node_item){
+            deleteAtHead();
             return;
         }
-        while(temp->next->next->data!=node_item){
+        while(temp->data!=node_item&&temp->next!=NULL){
+            prev = prev->next;
             temp = temp->next;
         }
-        deleteNode = temp->next;
-        cout<<"Node element "<<deleteNode->data<<" deleted\n";
-        temp->next = temp->next->next;
-    }
-    void sort(){
-        int sort_temp;
-        node* temp1 = head;
-        node* temp2 = head->next;
-        for(temp1->data;temp1->next!=NULL;temp1=temp1->next){
-            for(temp2=temp1->next;temp2->next!=NULL;temp2=temp2->next){
-                if(temp1->data > temp2->data){
-                    sort_temp = temp1->data;
-                    temp1->data = temp2->data;
-                    temp2->data = sort_temp;
-                }
-            }
+        if(temp->data==node_item){
+            deleteNode = temp;
+            cout<<"Node element "<<deleteNode->data<<" deleted\n";
+            prev->next = temp->next;
+        }else{
+            cout<<"\nnode element not found\n";
+            return;
         }
-    }
-    void search(){
-        node* temp = head;
-        cout<<"Enter the item to find : ";
-        cin>>item;
-        while(temp->next!=NULL){
-            if(temp->data==item){
-                cout<<item<<" found";
-                return;
-            }
-            temp = temp->next;
-        }
-        cout<<item<<" not found";
     }
     void display(){
         node* temp = head;
@@ -178,45 +92,39 @@ class link_list{
 int main(){
     int opt;
     char ch;
+    cout<<"--Singly linked list operation--\n";
     do{
-        cout<<"Enter from the options : \n1.Insert\t2.Delete\n3.Display\t4.Sort\n5.Search\n";
+        cout<<"Enter from the options : \n1.Insert\t2.Delete\n3.Display\t4.Exit\n";
         cin>>opt;
         switch(opt){
-            case 1 : cout<<"Insertion\n1.At end\t2.At head\n3.After node\t4.Before node\n";
+            case 1 : cout<<"Insertion\n1.At end\t2.At head\n";
                 cin>>opt;
-                switch(opt){
-                    case 1 : obj.inputAtEnd();
-                    break;
-                    case 2 : obj.insertAtHead();
-                    break;
-                    case 3 : obj.insertAfterNode();
-                    break;
-                    case 4 : obj.insertBeforeNode();
-                    break;
-                }
+                do{
+                    switch(opt){
+                        case 1 : obj.inputAtEnd();
+                        break;
+                        case 2 : obj.insertAtHead();
+                        break;
+                    }
+                    cout<<"\nDo you want to repeat insertion(y/n)? ";
+                    cin>>ch;
+                }while(ch=='y'||ch=='Y');
             break;
-            case 2 : cout<<"Deletion\n1.At end\t2.At head\n3.After node\t4.Before node\n";
+            case 2 : cout<<"Deletion\n1.At end\t2.At head\n3.Info\n";
                 cin>>opt;
                 switch(opt){
                     case 1 : obj.deleteAtEnd();
                     break;
                     case 2 : obj.deleteAtHead();
                     break;
-                    case 3 : obj.deleteAfterNode();
-                    break;
-                    case 4 : obj.deleteBeforeNode();
+                    case 3 : obj.deleteInfo();
                     break;
                 }
             break;
             case 3 : obj.display();
             break;
-            case 4 : obj.sort();
-            break;
-            case 5 : obj.search();
-            break;
+            case 4 : exit(0);
             default : cout<<"\nInvalid choice input\n";
         }
-        cout<<"\nDo you want to continue(y/n)?";
-        cin>>ch;
-    }while(ch=='Y'||ch=='y');
+    }while(1);
 }

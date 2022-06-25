@@ -4,7 +4,7 @@ using namespace std;
 struct node{
     int roll_no;
     char name[50];
-    int mark[3];
+    int total_mar;
     struct node* next;
 };
 class stud{
@@ -17,32 +17,55 @@ class stud{
         cin>>temp->roll_no;
         cout<<"Enter the name of student : ";
         cin>>temp->name;
-        for(int i = 0; i<3; i++){
-            cout<<"Enter the mark of subject "<<i+1<<" : ";
-            cin>>temp->mark[i];
-        }
+        cout<<"Enter the total mark : ";
+        cin>>temp->total_mar;        
         if(head==NULL){
             head = temp;
-            return;
-        }
-        node* n = head;
-        while(n->next!=NULL){
-            n = n->next;
-        }
-        n->next = temp;
+        }else{
+            node* n = head;
+            while(n->next!=NULL){
+                n = n->next;
+            }
+            n->next = temp;
+        }        
     }
     void display(){
         node* temp = head;
-        while(temp->next!=NULL){
+        while(temp){
             cout<<"Roll number = "<<temp->roll_no<<endl<<"Name = "<<temp->name<<endl;
-            for(int i = 0; i<3; i++){
-                cout<<"Mark of subject "<<i+1<<" : "<<temp->mark[i]<<endl;
-            }
+            cout<<"Total mark of subject : "<<temp->total_mar<<endl;
             temp = temp->next;
         }
-        cout<<"\nRoll number = "<<temp->roll_no<<endl<<"Name = "<<temp->name<<endl;
-        for(int i = 0; i<3; i++){
-                cout<<"Mark of subject "<<i+1<<" : "<<temp->mark[i]<<endl;
+    }
+    void deletion(){
+        int roll;
+        node * ptr;
+        node * prev;
+        if(head==NULL){
+            cout<<"List is empty";
+        }else{
+            cout<<"Enter the roll number to delete : ";
+            cin>>roll;
+            for(ptr = head; ptr->next!=NULL;ptr = ptr->next){
+                if(ptr->roll_no==roll){
+                    break;
+                }else
+                    prev = ptr;
+            }
+            if(ptr->roll_no==roll){
+                if(ptr==head){
+                    if(ptr->next==NULL)
+                        head = NULL;
+                    else
+                        head = head->next;
+                }else{
+                    prev->next = ptr->next;
+                }
+                delete ptr;
+                cout<<"\nSuccesfully deleted roll number : "<<roll<<endl;
+            }else{
+                cout<<endl<<roll<<" is not in the list\n";
+            }
         }
     }
 };
@@ -51,7 +74,7 @@ int main(){
     int opt;
     char ch;
     do{
-        cout<<"Choose from the options below :\n1.Insert\t\t2.Display\n3.Exit\n";
+        cout<<"Choose from the options below :\n1.Insert\t2.Display\n3.Delete\t4.Exit\n";
         cin>>opt;
         switch(opt){
             case 1 : 
@@ -63,7 +86,9 @@ int main(){
             break;
             case 2 : obj.display();
             break;
-            case 3 : exit(0);
+            case 3 : obj.deletion();
+            break;
+            case 4 : exit(0);
             default : cout<<"Invalid option inputed";
         }
     }while(1);

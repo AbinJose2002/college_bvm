@@ -3,7 +3,7 @@ using namespace std;
 
 class elementTraversal{
     public:
-
+    
     int n, a[100], i;
 
     void input();
