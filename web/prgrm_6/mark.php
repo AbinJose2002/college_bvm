@@ -71,7 +71,7 @@
         <td align = center colspan=2>$percent%</td>
     </tr>
     <tr>
-        <th>Grade Awarded</th>;
+        <th>Grade Awarded</th>
         <td colspan=2 align=center>$grade</td>
     </tr>
     </table>
